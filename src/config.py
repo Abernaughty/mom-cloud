@@ -5,7 +5,6 @@ with type validation and sensible defaults.
 """
 
 from pathlib import Path
-from typing import Optional
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -83,4 +82,4 @@ if __name__ == "__main__":
         print(f"  Dedup:       {config.dedup_enabled}")
     except Exception as e:
         print(f"Configuration error: {e}")
-        raise SystemExit(1)
+        raise SystemExit(1) from e
