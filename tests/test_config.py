@@ -8,7 +8,6 @@ import pytest
 
 from src.config import Settings
 
-
 # Shortened connection string for test readability
 TEST_CONN_STR = (
     "DefaultEndpointsProtocol=https;"
