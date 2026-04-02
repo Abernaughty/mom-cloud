@@ -1,0 +1,20 @@
+# mom-cloud Docker Compose
+#
+# TODO: Expand in M4 (Issue #4) and M5 (Issue #5)
+
+version: "3.8"
+
+services:
+  pipeline:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    env_file:
+      - ../.env
+    volumes:
+      - staging_data:/app/staging
+      - log_data:/app/logs
+
+volumes:
+  staging_data:
+  log_data:
