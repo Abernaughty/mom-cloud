@@ -46,9 +46,9 @@ class Settings(BaseSettings):
     )
 
     # Sub-configs
-    icloud: ICloudSettings = Field(default_factory=ICloudSettings)
-    azure: AzureSettings = Field(default_factory=AzureSettings)
-    pipeline: PipelineSettings = Field(default_factory=PipelineSettings)
+    icloud: ICloudSettings = Field(default_factory=lambda: ICloudSettings())
+    azure: AzureSettings = Field(default_factory=lambda: AzureSettings())
+    pipeline: PipelineSettings = Field(default_factory=lambda: PipelineSettings())
 
     # Local paths
     staging_dir: Path = Field(default=Path("./staging"), description="Local staging directory")
