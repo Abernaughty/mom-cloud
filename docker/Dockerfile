@@ -11,4 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src/
 
+RUN groupadd --system app && useradd --system --gid app --create-home app \
+    && chown -R app:app /app
+USER app
+
 ENTRYPOINT ["python", "-m", "src.ingest"]

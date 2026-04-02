@@ -41,24 +41,16 @@ class TestSettings:
 
     def test_loads_from_environment(self, clean_env):
         """Settings should load from environment variables."""
-        settings = Settings(
-            _env_file=None,
-            icloud__username=clean_env["ICLOUD_USERNAME"],
-            azure__connection_string=clean_env["AZURE_STORAGE_CONNECTION_STRING"],
-            azure__container_name=clean_env["AZURE_STORAGE_CONTAINER_NAME"],
-            staging_dir=Path(clean_env["STAGING_DIR"]),
-            log_dir=Path(clean_env["LOG_DIR"]),
-        )
+        settings = Settings(_env_file=None)
         assert settings.icloud.username == "test@icloud.com"
+        assert settings.azure.connection_string == TEST_CONN_STR
         assert settings.azure.container_name == "test-photos"
+        assert settings.staging_dir == Path("/tmp/mom-cloud-test/staging")
+        assert settings.log_dir == Path("/tmp/mom-cloud-test/logs")
 
     def test_default_values(self, clean_env):
         """Settings should have sensible defaults."""
-        settings = Settings(
-            _env_file=None,
-            icloud__username=clean_env["ICLOUD_USERNAME"],
-            azure__connection_string=clean_env["AZURE_STORAGE_CONNECTION_STRING"],
-        )
+        settings = Settings(_env_file=None)
         assert settings.pipeline.log_level == "INFO"
         assert settings.pipeline.dry_run is False
         assert settings.dedup_enabled is True
@@ -69,8 +61,6 @@ class TestSettings:
         logs = tmp_path / "logs"
         settings = Settings(
             _env_file=None,
-            icloud__username=clean_env["ICLOUD_USERNAME"],
-            azure__connection_string=clean_env["AZURE_STORAGE_CONNECTION_STRING"],
             staging_dir=staging,
             log_dir=logs,
         )

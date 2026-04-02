@@ -10,3 +10,4 @@ echo "============================="
 echo ""
 echo "This script will be implemented in Milestone 4."
 echo "It will install Docker, configure storage, and set up the pipeline."
+exit 1
