@@ -45,10 +45,16 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # Sub-configs
-    icloud: ICloudSettings = Field(default_factory=lambda: ICloudSettings())
-    azure: AzureSettings = Field(default_factory=lambda: AzureSettings())
-    pipeline: PipelineSettings = Field(default_factory=lambda: PipelineSettings())
+    # Sub-configs — required fields are populated from env vars at runtime
+    icloud: ICloudSettings = Field(
+        default_factory=lambda: ICloudSettings(),  # type: ignore[call-arg]
+    )
+    azure: AzureSettings = Field(
+        default_factory=lambda: AzureSettings(),  # type: ignore[call-arg]
+    )
+    pipeline: PipelineSettings = Field(
+        default_factory=lambda: PipelineSettings(),
+    )
 
     # Local paths
     staging_dir: Path = Field(default=Path("./staging"), description="Local staging directory")
