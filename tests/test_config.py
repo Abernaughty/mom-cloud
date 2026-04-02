@@ -6,7 +6,16 @@ from unittest.mock import patch
 
 import pytest
 
-from src.config import Settings, load_settings
+from src.config import Settings
+
+
+# Shortened connection string for test readability
+TEST_CONN_STR = (
+    "DefaultEndpointsProtocol=https;"
+    "AccountName=test;"
+    "AccountKey=dGVzdA==;"
+    "EndpointSuffix=core.windows.net"
+)
 
 
 @pytest.fixture
@@ -14,7 +23,7 @@ def env_vars():
     """Minimal environment variables for valid config."""
     return {
         "ICLOUD_USERNAME": "test@icloud.com",
-        "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=test;AccountKey=dGVzdA==;EndpointSuffix=core.windows.net",
+        "AZURE_STORAGE_CONNECTION_STRING": TEST_CONN_STR,
         "AZURE_STORAGE_CONTAINER_NAME": "test-photos",
         "STAGING_DIR": "/tmp/mom-cloud-test/staging",
         "LOG_DIR": "/tmp/mom-cloud-test/logs",
